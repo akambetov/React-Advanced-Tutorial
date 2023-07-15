@@ -3,6 +3,7 @@ import { buildLoaders } from './buildLoader'
 import { buildResolvers } from './buildResolvers'
 import { buildPlugins } from './buildPlugins'
 import { BuildOptions } from './types/config'
+import { buildDevSerer } from './buildDevServer'
 
 export const buildWebpackConfig = (options: BuildOptions): webpack.Configuration => {
   const {mode, paths} = options
@@ -22,5 +23,7 @@ export const buildWebpackConfig = (options: BuildOptions): webpack.Configuration
       extensions: buildResolvers(),
     },
     plugins: buildPlugins(options),
+    devtool: 'inline-source-map',
+    devServer: buildDevSerer(options)
   }
 }
