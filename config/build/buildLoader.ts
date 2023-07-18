@@ -19,7 +19,16 @@ export const buildLoaders = ({ isDev }: BuildOptions): webpack.RuleSetRule[] => 
 
       {
         loader: "css-loader",   // Translates CSS into CommonJS
-        options: {modules: true}
+        options: {
+          modules: {
+            // auto: /module/                    //только файлы scss в названи которых есть слово "module" обрабатываються как модуль-css 
+            // auto: /\.module\.s[ac]ss$/        //только файлы scss в названи которых есть слово "module" обрабатываються как модуль-css 
+            auto: (path: string): boolean => path.includes('.module.scss'),       //только файлы scss в названи которых есть слово "module" обрабатываються как модуль-css 
+            localIdentName: isDev
+              ? '[path][name]__[local]--[hash:base64:5]'
+              : '[hash:base64:8]'
+          }
+        }
       },
       "sass-loader",  // Compiles Sass to CSS
     ],
