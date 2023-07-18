@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 
 export const buildLoaders = (): webpack.RuleSetRule[] => {
+  // если не использовать typescript - нужен babel-loader
   const typescriptLoader = {
     test: /\.tsx?$/,
     use: 'ts-loader',
