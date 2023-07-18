@@ -17,7 +17,10 @@ export const buildLoaders = ({ isDev }: BuildOptions): webpack.RuleSetRule[] => 
         ? "style-loader"  /*Creates `style` nodes from JS strings */
         : MiniCssExtractPlugin.loader,
 
-      "css-loader",   // Translates CSS into CommonJS
+      {
+        loader: "css-loader",   // Translates CSS into CommonJS
+        options: {modules: true}
+      },
       "sass-loader",  // Compiles Sass to CSS
     ],
   };
